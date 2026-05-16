@@ -1,4 +1,4 @@
-name: Build ESP32 Firmware
+name: Build ESP32 Makita BMS Reader
 
 on:
   workflow_dispatch:
@@ -9,17 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
           python-version: '3.9'
-      - name: Install PlatformIO
+      - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       - name: Build firmware
         run: pio run -e esp32_web
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload firmware
+        uses: actions/upload-artifact@v6
         with:
           name: firmware_bin
           path: .pio/build/esp32_web/firmware.bin
